@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cutu, you’ve got a Miss You call</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Caveat+Brush&family=DM+Serif+Display:ital@0;1&family=Nunito:wght@400;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gPetalL" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#faf6f8"/><stop offset="1" stop-color="#ebe8df"/></linearGradient>
+    <linearGradient id="gPetalR" x1="1" y1="0" x2="0.2" y2="1"><stop offset="0" stop-color="#f7f2f5"/><stop offset=".6" stop-color="#ece4e9"/><stop offset="1" stop-color="#dfe0d3"/></linearGradient>
+    <linearGradient id="gPetalB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#efe7ec"/><stop offset="1" stop-color="#d6cdd1"/></linearGradient>
+    <linearGradient id="gLeaf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9bcb8f"/><stop offset="1" stop-color="#4f8f55"/></linearGradient>
+    <linearGradient id="gStem" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8bc27f"/><stop offset="1" stop-color="#5c9a5b"/></linearGradient>
+  </defs>
+</svg>
+<canvas id="confetti"></canvas>
+<div id="hearts"></div>
+
+<!-- 1. PASSCODE -->
+<section class="screen active" id="s-lock">
+  <div class="lock-wrap"><div class="glow"></div><div class="lock">🔐</div></div>
+  <p class="enter">ENTER PASSCODE</p>
+  <div class="boxes" id="boxes"><i></i><i></i><i></i><i></i></div>
+  <p class="sub" id="lockMsg">Something special is waiting for you</p>
+  <div class="dash"></div>
+  <div class="pad" id="pad"></div>
+</section>
+
+<!-- 2. GREETING -->
+<section class="screen" id="s-hello">
+  <h1 class="hb">Happy Birthday,<br><span class="name"></span></h1>
+  <div class="bears">
+    <svg viewBox="0 0 220 40" class="bunting"><path d="M5 5 Q110 35 215 5" fill="none" stroke="#333" stroke-width="2"/>
+      <polygon points="20,12 34,14 27,32" fill="#ff7b7b"/><polygon points="50,19 64,20 57,38" fill="#ffd166"/><polygon points="82,24 96,25 89,43" fill="#7bd88f"/><polygon points="114,25 128,24 121,43" fill="#6ec1ff"/><polygon points="146,21 160,19 153,38" fill="#b48cff"/><polygon points="178,15 192,12 185,32" fill="#ff7bb6"/></svg>
+    <span class="b1">🐻</span><span class="b2">🐼</span><span class="cake">🎂</span>
+  </div>
+  <p class="q">Are you excited for what’s next?</p>
+  <div class="btns"><button class="btn red" data-next="s-balloon">Yes</button><button class="btn ghost" id="no">No</button></div>
+</section>
+
+<!-- 3. BALLOONS -->
+<section class="screen" id="s-balloon">
+  <h2 class="title sans">Pop all 4 balloons</h2>
+  <div class="stage" id="balloonStage"></div>
+</section>
+
+<!-- 4. CANDLE -->
+<section class="screen" id="s-candle">
+  <h2 class="title serif"></h2>
+  <div class="candle-box" id="candle">
+    <div class="flame" id="flame"></div><div class="wick"></div>
+    <div class="cake2"></div>
+    <p class="wish" id="wish">Close your eyes<br>&amp; make a wish</p>
+  </div>
+  <p class="hint" id="candleHint">Tap the candle to blow it out</p>
+</section>
+
+<!-- 5. PHOTOS -->
+<section class="screen" id="s-photo">
+  <h2 class="title serif it">Some Sweet Moments</h2>
+  <div class="polaroids" id="polaroids"></div>
+  <button class="btn red wide" data-next="s-letter">Continue</button>
+</section>
+
+<!-- 6. LETTER -->
+<section class="screen" id="s-letter">
+  <h2 class="title serif it small">A Message From My Heart</h2>
+  <p class="tap" id="tapHint">Tap to open</p>
+  <div class="envelope" id="envelope"><div class="flap"></div><div class="body"></div></div>
+  <div class="letter" id="letter"><button class="heart">♥</button><div class="text" id="letterText"></div><span class="bear">🧸</span></div>
+  <button class="btn red hidden" id="lastBtn">One last surprise →</button>
+  <p class="tap bottom" id="tapBottom">TAP TO OPEN</p>
+</section>
+
+<!-- 7. FINAL PAGE -->
+<section class="screen" id="s-final">
+  <div class="f-garden" id="fGarden" aria-hidden="true"></div>
+  <main class="f-page">
+    <h1>One Last Thing... 🧸</h1>
+    <section class="f-slider" id="fSlider" aria-label="Photo slideshow">
+      <div class="f-track" id="fTrack"></div>
+      <button class="f-nav f-prev" id="fPrev" aria-label="Previous photo">‹</button>
+      <button class="f-nav f-next" id="fNext" aria-label="Next photo">›</button>
+    </section>
+    <div class="f-dots" id="fDots"></div>
+    <section class="f-wish">
+      <p id="fWishText"></p>
+      <div class="f-sign" id="fSign"></div>
+    </section>
+    <button class="f-btn" id="fHeartBtn">Send some love ♥</button>
+  </main>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
